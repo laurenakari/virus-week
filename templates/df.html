@@ -1,0 +1,229 @@
+{% extends 'base.html' %}
+{% block content %}
+<style type="text/css" media="screen">
+
+    h1{
+        font-family: 'Dosis', sans-serif;
+        margin-left: 145px;
+        padding: 20px 16px 20px 0px;
+    }
+    h2{
+        color:rgb(134, 13, 13);
+        font-family: 'Dosis', sans-serif;
+        margin-left: 200px;
+        padding: 20px 16px 20px 0px;
+        display:none;
+    }
+
+    h2.heading1{
+        float:right; 
+        margin-right:700px;
+    }
+
+    h2.heading2{
+        text-align:left;
+        float:right;
+        margin-right:435px; 
+    }
+    a{
+        color:white;
+    }
+
+    a:hover{
+        color:red;
+        text-decoration: none;
+    }
+
+    h4{
+        color: red;
+        font-family: 'Dosis', sans-serif;
+        margin-left: 15px;
+    }
+
+    h6{
+        color:white;
+        font-family: 'Dosis', sans-serif;
+        font-size: 18px;
+        padding: 15px 5px 20px 5px;
+        margin-left: 15px;
+        line-height:1.8;
+    }
+    button{
+        font-family: 'Dosis', sans-serif;
+        font-size: 20px;
+        color:rgb(75, 73, 73);
+        padding:30px 0px;
+        border:none;
+        background: none;
+    }
+    
+    button:hover{
+        text-decoration: none;
+        color:white;
+        text-decoration: none;
+    }
+
+    body{
+        color:white;
+        font-family: 'Dosis', sans-serif;
+        font-size: 18px;
+    }
+    p{
+        color: whitesmoke;
+        font-family: 'Dosis', sans-serif;
+        font-size: 18px;
+        padding: 12px 5px;
+        margin-left: 350px;
+        line-height: 1.8;
+        display:none;
+        text-align: left;
+        float: left;
+    }
+
+    p.p2{
+        margin-bottom:60px;
+    }
+    
+    .table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+  color: red;
+    }   
+
+    img.img1{
+        height: 40px;
+        margin-right: 30px;
+    }
+
+    img.img2{
+        height: 40px;
+        margin-right: 30px;
+    }
+
+    img.img3{
+        height: 40px;
+        margin-right: 30px;
+    }
+    
+    img.img4{
+        height: 40px;
+        margin-right: 35px;
+    }
+
+    img.img5{
+        height: 40px;
+        margin-right: 10px; 
+        margin-bottom:5px;
+    }
+
+    img:hover {
+        transform: scale(1.2);
+        transition: .4s;
+    }
+    
+    
+    </style>
+
+<br />
+<br />
+<br />
+<img src= "./static/virus.png" class="img5">
+<h1 style="text-align:left;float:left;"><a href="/">COVID-19 Data</a></h1>
+
+
+<button type="button">Learn More >></button>
+    <h2 class="heading1">What is COVID-19?</h2>
+    <p class="p1">
+        Coronavirus Disease 2019 (COVID-19) is a disease that was identified in Wuhan, China, 
+        and is now being spread throughout the world. <br />
+        People are encouraged to take common-sense precautions to prevent the spread of
+        all infectious diseases, including COVID-19.  
+    </p>
+    
+    <h2 class="heading2">How do I protect myself from COVID-19?</h2>
+    <p class="p2">
+         <l1><img src= "./static/wash-hands.png" class="img1">Wash your hands often with soap and water for at least
+             20 seconds.
+         </l1> <br />
+         <br />
+         <l1><img src= "./static/social-distance.png" class="img2">Avoid close contact by maintaining a distance of six
+             feet between yourself and the people around you.
+         </l1> <br />
+         <br />
+         <l1><img src= "./static/mask.png" class="img3">Cover your mouth and nose with a mask when around others.
+         </l1> <br />
+         <br />
+         <l1><img src= "./static/cleaning.png" class="img4">Clean and disinfect frequently touched surfaces daily.
+         </l1> <br />
+         <br />
+    </p>
+
+
+    <script>
+    $("button").click(function() {
+        $("h2").slideToggle();
+        $("p").slideToggle();
+    });
+
+    
+    </script>
+
+
+<br />
+<br />
+
+
+<div class = "container">
+    <div class = "row"> <!--ties bootstrap columns together-->
+        <div class = "col-4"> <!--bootstrap, adjust column width-->
+           <h4>Top 10 Countries</h4>
+           <h6> This table provides updated daily reports on worldwide corona virus cases 
+               from the <a href= "https://github.com/CSSEGISandData/COVID-19" 
+               style="color: grey">John's Hopkins CSSEGISandData GitHub.</a></h6>
+        <div class = "table-container">
+            <table class = "table-responsive-sm table-sm table-bordered table-hover">
+            <thead>
+            <tr>
+                <th scope = "col">Country</th>
+                <th scope = "col">Confirmed</th>
+                <th scope = "col">Deaths</th>
+                <th scope = "col">Recovered</th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for pair in pairs %} <!--for loops, puts table and map next to each other-->
+
+                    <tr>
+                        <td>{{ pair[0] }}</td>
+                        <td>{{ pair[1] }}</td>
+                        <td>{{ pair[2] }}</td>
+                        <td>{{ pair[3] }}</td>
+                         
+                    </tr>
+
+                {% endfor %}
+            </tbody>
+            </table>
+        </div>
+        </div>
+        <div class = "col-8"> <!--bootstrap, adjust column width-->
+            <h4>World Map of Cases</h4>
+            <h6>Using the same data we provide an updated map that contains information
+                on worldwide confirmed cases, deaths and recoveries. Feel free to interact with the map. 
+
+                <br />If the map does not work, try loading the site on a different browser.
+            </h6>
+            {{ vmap | safe }}
+        </div>
+    </div>
+</div>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+{% endblock %}
+
+
