@@ -72,9 +72,5 @@ app = Flask(__name__)
 def home():
     return render_template('df.html', frame = cdf, vmap = cmap, pairs = tup_list)
 
-@app.route('/about')
-def about():
-    return render_template('about.html')
-
 if __name__ == '__main__':
     app.run(debug = True)
